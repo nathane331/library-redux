@@ -6,6 +6,40 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <div class="header">
+        <h1 class="site-title">Nate's Library</h1>
+        <button class="add-book-btn">Add a Book</button>
+    </div>
+    <div class="main-content"></div>
+
+    <dialog class="new-book-dialog">
+    <div class="add-book-modal">
+        <h2>Add a new Book:</h2>
+        <form action="">
+            
+            <fieldset>    
+                  <label for="book_title">Book Title:</label><input type="text" name="Book Title" id="input-title" class="input-title" required>
+                
+                    <label for="book_author">Author:</label><input type="text" name="Author" id="input-author">
+                
+                    <label for="book_pages">Pages:</label><input type="number" name="NumOfPages" id="input-numOfPages">
+                
+                    <label for="finisehd_reading">Finished?</label><input type="checkbox" name="finished_reading" id="input-finished-reading">
+
+                    <div class="form-buttons">
+                        <button type ="button" class="dialog-btn cancel-btn">Cancel</button>
+                        <button type="submit" class="dialog-btn submit-btn">Submit</button>
+                    </div>
+                    
+                    
+                
+            </fieldset>
+        </form>
+    </div>
+    </dialog>
+
+
+  
+
 </body>
 </html>
