@@ -6,6 +6,8 @@ const addBookButton = document.querySelector(".add-book-btn");
 const submitButton = document.querySelector(".submit-btn");
 const cancelButton = document.querySelector(".cancel-btn");
 
+const bookCardContainer = document.querySelector(".book-card-container");
+
 function OpenAddBookDialog(){
     const dialog = document.querySelector(".new-book-dialog");
     const bookTitleInput = document.querySelector(".input-title");
@@ -47,17 +49,97 @@ function saveBook(event){
     formRead.checked = false;
 
     CloseAddBookDialog();
-    //update display;
+    UpdateLibraryDisplay();
 
 }
 
 function UpdateLibraryDisplay(){
+    bookCardContainer.innerHTML = ""; //clear the main content
 
-    
+    myLibrary.libraryArray.forEach(book => {
+        const cardDiv = document.createElement("div");
+        cardDiv.classList.add("card");
+        
+        cardDiv.id = book.id;
+
+        const titleAuthorDiv = document.createElement("div");
+        titleAuthorDiv.classList.add("title-author-container");
+
+        const numberReadDiv = document.createElement("div");
+        numberReadDiv.classList.add("number-read-container");
+
+        const removeBookButton = document.createElement("button");
+        removeBookButton.classList.add("remove-book-button");
+        removeBookButton.setAttribute('data-id', book.id);
+        
+        const removeTooltip = document.createElement("span");
+        removeTooltip.classList.add("tooltip-text");
+        removeTooltip.textContent = "Remove from Library";
+
+        removeBookButton.appendChild(removeTooltip);
+
+        cardDiv.appendChild(titleAuthorDiv);
+        cardDiv.appendChild(numberReadDiv);
+
+
+        const bookTitle = document.createElement("h1");
+        const bookAuthor = document.createElement("h3");
+        const numberPages = document.createElement("p");
+        
+        const finishedReading = document.createElement("input");
+        finishedReading.setAttribute('type', "checkbox");
+        finishedReading.addEventListener('change', ()=> {
+            
+            book.toggleRead()
+        });
+
+
+        
+
+        bookTitle.textContent = book.title;
+        bookTitle.classList.add("book-title");
+        titleAuthorDiv.appendChild(bookTitle);
+
+        bookAuthor.textContent = book.author;
+        bookAuthor.classList.add("book-author");
+        titleAuthorDiv.appendChild(bookAuthor);
+
+        numberPages.textContent = book.numberOfPages + ' pages';
+        numberPages.classList.add("number-pages");
+        numberReadDiv.appendChild(numberPages);
+
+
+        
+        if(book.read == true){
+            finishedReading.checked = true;
+        }
+        else{
+            finishedReading.checked = false;
+        }
+
+        finishedReading.classList.add("finished-reading");
+        numberReadDiv.appendChild(finishedReading);
+
+        
+        const removeIcon = document.createElement("span");
+        removeIcon.classList.add("material-symbols-outlined");
+        removeIcon.textContent = "close";
+
+        removeBookButton.appendChild(removeIcon);
+        numberReadDiv.appendChild(removeBookButton);
+        removeBookButton.addEventListener("click", ()=> {
+            //myLibrary.libraryArray.removeBookEntry(book.id);
+            //myLibrary.libraryArray..updateDisplay();
+
+        });
+
+
+        bookCardContainer.appendChild(cardDiv);
+
+    });
+
 
 }
-
-
 
 
 //close note dialog when clicking outside the dialog element
