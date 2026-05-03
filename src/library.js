@@ -1,4 +1,4 @@
-export const greeting = "hello";
+export {Book, Library};
 // let myLibrary = [];
 // const mainContentPage = document.querySelector(".main-content");
 
@@ -32,10 +32,10 @@ export const greeting = "hello";
 
 const mainContentPage = document.querySelector(".main-content");
 
-const newBookTitle = document.querySelector("#input-title");
-const newBookAuthor = document.querySelector("#input-author");
-const newBookPages = document.querySelector("#input-numOfPages");
-const newBookRead = document.querySelector("#input-finished-reading");
+// const newBookTitle = document.querySelector("#input-title");
+// const newBookAuthor = document.querySelector("#input-author");
+// const newBookPages = document.querySelector("#input-numOfPages");
+// const newBookRead = document.querySelector("#input-finished-reading");
 
 
 
@@ -61,27 +61,16 @@ class Library{
         console.log("Initialize Library.");
     }
 
-    createBookEntry(title, author, numberOfPages, read){
-        let newBookEntry = new Book(title, author, numberOfPages, read);
-        this.libraryArray.push(newBookEntry);
-        console.log(newBookEntry);
-        //     ClearDisplay();
-        //     DisplayLibrary(myLibrary);
+    addBook(book){
+        this.libraryArray.unshift(book); //add new item to the front of the list and return new length of array
     }
 
     removeBookEntry(id){
-
-        let removeIndex;
-
         this.libraryArray.forEach(book => {
-            if(book.id == id){    
-            removeIndex = this.libraryArray.indexOf(book);
+            if(book.id === id){    
+            this.libraryArray.pop(book); //pop removes
             } 
         })
-
-        let newLibrary = this.libraryArray.splice(removeIndex, 1);
-        console.log("Removed Entry from Library");
-
         
     }
 
@@ -317,5 +306,7 @@ class LibraryDisplay{
 // }
 
 
-const myLibrary = new Library(); //create a library with a libraryArray inside. 
-const myLibraryDisplay = new LibraryDisplay(myLibrary); //create a new libraryDisplay using myLibrary. 
+
+
+//const myLibrary = new Library(); //create a library with a libraryArray inside. 
+//const myLibraryDisplay = new LibraryDisplay(myLibrary); //create a new libraryDisplay using myLibrary. 
