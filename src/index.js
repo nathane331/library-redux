@@ -27,13 +27,24 @@ cancelButton.addEventListener('click', CloseAddBookDialog);
 submitButton.addEventListener('click', saveBook);
 
 
+
 let myLibrary = new Library;
 myLibrary.libraryArray = loadBooksFromLocalStorage();
 UpdateLibraryDisplay();
 
 function loadBooksFromLocalStorage(){
-    const savedBooks = localStorage.getItem('savedBooks');
-    return savedBooks ? JSON.parse(savedBooks) : [];
+    let savedBooks = localStorage.getItem('savedBooks');
+    savedBooks =  savedBooks ? JSON.parse(savedBooks) : [];
+    
+    let booksToLoad = [];
+
+    savedBooks.forEach(book => {
+        const newBook = new Book(book.title, book.author, book.numberOfPages, book.read);
+        booksToLoad.unshift(newBook);
+        }
+    );
+
+    return booksToLoad;
 }
 
 function saveBooksToLocalStorage(){
@@ -109,7 +120,7 @@ function UpdateLibraryDisplay(){
         finishedReading.addEventListener('change', ()=> {
             
             console.log(book);
-            //book.toggleRead();
+            book.toggleRead();
         });
 
 
