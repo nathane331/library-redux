@@ -44,7 +44,7 @@ body{
 }
 
 .add-book:hover{
-    background-color: rgb(27, 41, 95);
+    background-color: rgb(13, 21, 49);
     box-shadow: inset 0px 10px 16px rgba(0, 0, 0, 0.35);
 }
 
@@ -63,7 +63,7 @@ body{
     border-radius: 5px;
     border-bottom: 10px solid royalblue;
     box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.25);
-    width: 175px;
+    width: 200px;
     height: 170px;
 
     padding: 1.5em;
@@ -121,15 +121,17 @@ body{
 
 .remove-book-button{
     background-color: white;
+    color:firebrick;
     border: 1px solid firebrick;
     border-radius: 50%;
     padding:5px;
-    height:37px;
+    height:25px;
     width:40px;
 }
 
 .remove-book-button:hover{
     background-color: firebrick;
+    color:white;
 }
 
 .remove-book-button:hover .tooltip-text{

@@ -30,8 +30,6 @@ export {Book, Library};
 
 // };
 
-const mainContentPage = document.querySelector(".main-content");
-
 // const newBookTitle = document.querySelector("#input-title");
 // const newBookAuthor = document.querySelector("#input-author");
 // const newBookPages = document.querySelector("#input-numOfPages");
@@ -49,7 +47,8 @@ class Book{
 
     toggleRead(){
         console.log("toggle read");
-        this.read = !read;
+        this.read = !this.read;
+        console.log(this.title + " 'finished' set to " +this.read);
     }
 }
 
@@ -64,146 +63,148 @@ class Library{
     }
 
     removeBookEntry(id){
-        this.libraryArray.forEach(book => {
-            if(book.id === id){    
-            this.libraryArray.pop(book); //pop removes
-            } 
-        })
+
+        this.libraryArray = this.libraryArray.filter((book) => book.id != id);
+        
+        // this.libraryArray.forEach(book => {
+        //     if(book.id === id){    
+        //     this.libraryArray.pop(book);
+        //     } 
+        // })
         
     }
 
 }
 
+// class LibraryDisplay{
 
-class LibraryDisplay{
+//     constructor(library){
 
-    constructor(library){
+//         this.library = library;
 
-        this.library = library;
-
-        this.addBookModal = document.querySelector("dialog");
-        //const showAddBookModal = document.querySelector(".add-book");
-        //showAddBookModal.addEventListener("click", () => {this.addBookModal.showModal();});
+//         this.addBookModal = document.querySelector("dialog");
+//         //const showAddBookModal = document.querySelector(".add-book");
+//         //showAddBookModal.addEventListener("click", () => {this.addBookModal.showModal();});
 
 
-        const formCancel = document.querySelector("#input-cancel");
-        const formSubmit = document.querySelector("#input-submit");
+//         const formCancel = document.querySelector("#input-cancel");
+//         const formSubmit = document.querySelector("#input-submit");
 
-        //formCancel.addEventListener("click", ()=> {this.addBookModal.close();});
-        //formSubmit.addEventListener("click", (event) =>{this.submitNewBook(this);});
+//         //formCancel.addEventListener("click", ()=> {this.addBookModal.close();});
+//         //formSubmit.addEventListener("click", (event) =>{this.submitNewBook(this);});
 
-        console.log("Initialize Library Display.");
-    }
+//         console.log("Initialize Library Display.");
+//     }
 
-    submitNewBook(libraryDisplay){
-        event.preventDefault();
-        libraryDisplay.updateDisplay();
-        let title = newBookTitle.value;
-        let author = newBookAuthor.value;
-        let pages = newBookPages.value;
-        let read = newBookRead.checked;
+//     submitNewBook(libraryDisplay){
+//         event.preventDefault();
+//         libraryDisplay.updateDisplay();
+//         let title = newBookTitle.value;
+//         let author = newBookAuthor.value;
+//         let pages = newBookPages.value;
+//         let read = newBookRead.checked;
 
-        libraryDisplay.library.createBookEntry(title, author, pages, read);
+//         libraryDisplay.library.createBookEntry(title, author, pages, read);
         
-        libraryDisplay.addBookModal.close();
-        libraryDisplay.updateDisplay(this.library);
-        console.log("Book Submitted.");
+//         libraryDisplay.addBookModal.close();
+//         libraryDisplay.updateDisplay(this.library);
+//         console.log("Book Submitted.");
         
-    }
+//     }
 
-    // createBookCard(book){
-    //     const cardDiv = document.createElement("div");
-    //     cardDiv.classList.add("card");
+//     // createBookCard(book){
+//     //     const cardDiv = document.createElement("div");
+//     //     cardDiv.classList.add("card");
         
-    //     cardDiv.id = book.id;
+//     //     cardDiv.id = book.id;
 
-    //     const titleAuthorDiv = document.createElement("div");
-    //     titleAuthorDiv.classList.add("title-author-container");
+//     //     const titleAuthorDiv = document.createElement("div");
+//     //     titleAuthorDiv.classList.add("title-author-container");
 
-    //     const numberReadDiv = document.createElement("div");
-    //     numberReadDiv.classList.add("number-read-container");
+//     //     const numberReadDiv = document.createElement("div");
+//     //     numberReadDiv.classList.add("number-read-container");
 
-    //     const removeBookButton = document.createElement("button");
-    //     removeBookButton.classList.add("remove-book-button");
-    //     removeBookButton.setAttribute('data-id', book.id);
+//     //     const removeBookButton = document.createElement("button");
+//     //     removeBookButton.classList.add("remove-book-button");
+//     //     removeBookButton.setAttribute('data-id', book.id);
         
-    //     const removeTooltip = document.createElement("span");
-    //     removeTooltip.classList.add("tooltip-text");
-    //     removeTooltip.textContent = "Remove from Library";
+//     //     const removeTooltip = document.createElement("span");
+//     //     removeTooltip.classList.add("tooltip-text");
+//     //     removeTooltip.textContent = "Remove from Library";
 
-    //     removeBookButton.appendChild(removeTooltip);
+//     //     removeBookButton.appendChild(removeTooltip);
 
-    //     cardDiv.appendChild(titleAuthorDiv);
-    //     cardDiv.appendChild(numberReadDiv);
+//     //     cardDiv.appendChild(titleAuthorDiv);
+//     //     cardDiv.appendChild(numberReadDiv);
 
 
-    //     const bookTitle = document.createElement("h1");
-    //     const bookAuthor = document.createElement("h3");
-    //     const numberPages = document.createElement("p");
+//     //     const bookTitle = document.createElement("h1");
+//     //     const bookAuthor = document.createElement("h3");
+//     //     const numberPages = document.createElement("p");
         
-    //     const finishedReading = document.createElement("input");
-    //     finishedReading.setAttribute('type', "checkbox");
-    //     finishedReading.addEventListener('change', ()=> {
+//     //     const finishedReading = document.createElement("input");
+//     //     finishedReading.setAttribute('type', "checkbox");
+//     //     finishedReading.addEventListener('change', ()=> {
             
-    //         book.toggleRead()
-    //     });
+//     //         book.toggleRead()
+//     //     });
 
 
-    //     const bookIcon = document.createElement("span");
-    //     bookIcon.classList.add("material-symbols-outlined");
-    //     bookIcon.textContent = "book";
+//     //     const bookIcon = document.createElement("span");
+//     //     bookIcon.classList.add("material-symbols-outlined");
+//     //     bookIcon.textContent = "book";
 
-    //     bookTitle.textContent = book.title;
-    //     bookTitle.classList.add("book-title");
-    //     titleAuthorDiv.appendChild(bookIcon);
-    //     titleAuthorDiv.appendChild(bookTitle);
+//     //     bookTitle.textContent = book.title;
+//     //     bookTitle.classList.add("book-title");
+//     //     titleAuthorDiv.appendChild(bookIcon);
+//     //     titleAuthorDiv.appendChild(bookTitle);
 
-    //     bookAuthor.textContent = book.author;
-    //     bookAuthor.classList.add("book-author");
-    //     titleAuthorDiv.appendChild(bookAuthor);
+//     //     bookAuthor.textContent = book.author;
+//     //     bookAuthor.classList.add("book-author");
+//     //     titleAuthorDiv.appendChild(bookAuthor);
 
-    //     numberPages.textContent = book.numberOfPages + ' pages';
-    //     numberPages.classList.add("number-pages");
-    //     numberReadDiv.appendChild(numberPages);
+//     //     numberPages.textContent = book.numberOfPages + ' pages';
+//     //     numberPages.classList.add("number-pages");
+//     //     numberReadDiv.appendChild(numberPages);
 
 
         
-    //     if(book.read == true){
-    //         finishedReading.checked = true;
-    //     }
-    //     else{
-    //         finishedReading.checked = false;
-    //     }
+//     //     if(book.read == true){
+//     //         finishedReading.checked = true;
+//     //     }
+//     //     else{
+//     //         finishedReading.checked = false;
+//     //     }
 
-    //     finishedReading.classList.add("finished-reading");
-    //     numberReadDiv.appendChild(finishedReading);
+//     //     finishedReading.classList.add("finished-reading");
+//     //     numberReadDiv.appendChild(finishedReading);
 
         
-    //     const removeIcon = document.createElement("span");
-    //     removeIcon.classList.add("material-symbols-outlined");
-    //     removeIcon.textContent = "close";
+//     //     const removeIcon = document.createElement("span");
+//     //     removeIcon.classList.add("material-symbols-outlined");
+//     //     removeIcon.textContent = "close";
 
-    //     removeBookButton.appendChild(removeIcon);
-    //     numberReadDiv.appendChild(removeBookButton);
-    //     removeBookButton.addEventListener("click", ()=> {
-    //         this.library.removeBookEntry(book.id);
-    //         this.updateDisplay();
+//     //     removeBookButton.appendChild(removeIcon);
+//     //     numberReadDiv.appendChild(removeBookButton);
+//     //     removeBookButton.addEventListener("click", ()=> {
+//     //         this.library.removeBookEntry(book.id);
+//     //         this.updateDisplay();
 
-    //     });
+//     //     });
 
 
-    //     mainContentPage.appendChild(cardDiv);
+//     //     mainContentPage.appendChild(cardDiv);
 
-    // }
+//     // }
 
-    updateDisplay(){
-        mainContentPage.innerHTML = "";
-        console.log("Clear Display.");
-        this.library.libraryArray.forEach((book) => this.createBookCard(book))
-        console.log("Update Display.");
-    }
+//     updateDisplay(){
+//         mainContentPage.innerHTML = "";
+//         console.log("Clear Display.");
+//         this.library.libraryArray.forEach((book) => this.createBookCard(book))
+//         console.log("Update Display.");
+//     }
 
-}
+// }
 
 
 // function CreateBookCard(book)

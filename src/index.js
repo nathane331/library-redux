@@ -27,6 +27,20 @@ cancelButton.addEventListener('click', CloseAddBookDialog);
 submitButton.addEventListener('click', saveBook);
 
 
+let myLibrary = new Library;
+myLibrary.libraryArray = loadBooksFromLocalStorage();
+UpdateLibraryDisplay();
+
+function loadBooksFromLocalStorage(){
+    const savedBooks = localStorage.getItem('savedBooks');
+    return savedBooks ? JSON.parse(savedBooks) : [];
+}
+
+function saveBooksToLocalStorage(){
+    localStorage.setItem('savedBooks', JSON.stringify(myLibrary.libraryArray));
+}
+
+
 function saveBook(event){
     event.preventDefault();
 
@@ -40,6 +54,7 @@ function saveBook(event){
     const read = formRead.checked;
 
     myLibrary.addBook(new Book(title, author, number, read));
+    saveBooksToLocalStorage();
 
     console.log(myLibrary.libraryArray);
 
@@ -47,6 +62,8 @@ function saveBook(event){
     formAuthorInput.value = ''
     formPageNumberInput.value = '';
     formRead.checked = false;
+
+
 
     CloseAddBookDialog();
     UpdateLibraryDisplay();
@@ -71,6 +88,7 @@ function UpdateLibraryDisplay(){
         const removeBookButton = document.createElement("button");
         removeBookButton.classList.add("remove-book-button");
         removeBookButton.setAttribute('data-id', book.id);
+        removeBookButton.innerHTML = "X";
         
         const removeTooltip = document.createElement("span");
         removeTooltip.classList.add("tooltip-text");
@@ -90,7 +108,8 @@ function UpdateLibraryDisplay(){
         finishedReading.setAttribute('type', "checkbox");
         finishedReading.addEventListener('change', ()=> {
             
-            book.toggleRead()
+            console.log(book);
+            //book.toggleRead();
         });
 
 
@@ -120,25 +139,16 @@ function UpdateLibraryDisplay(){
         finishedReading.classList.add("finished-reading");
         numberReadDiv.appendChild(finishedReading);
 
-        
-        const removeIcon = document.createElement("span");
-        removeIcon.classList.add("material-symbols-outlined");
-        removeIcon.textContent = "close";
-
-        removeBookButton.appendChild(removeIcon);
         numberReadDiv.appendChild(removeBookButton);
         removeBookButton.addEventListener("click", ()=> {
-            //myLibrary.libraryArray.removeBookEntry(book.id);
-            //myLibrary.libraryArray..updateDisplay();
-
+            myLibrary.removeBookEntry(book.id);
+            saveBooksToLocalStorage();
+            UpdateLibraryDisplay();
         });
-
-
         bookCardContainer.appendChild(cardDiv);
-
     });
 
-
+    console.log(myLibrary.libraryArray);
 }
 
 
@@ -155,6 +165,4 @@ document.addEventListener('DOMContentLoaded', function(){
 })
 
 
-let myLibrary;
-myLibrary = new Library;
 
