@@ -24,7 +24,7 @@ function CloseAddBookDialog(){
 addBookButton.addEventListener('click', OpenAddBookDialog);
 cancelButton.addEventListener('click', CloseAddBookDialog);
 
-submitButton.addEventListener('click', saveBook);
+submitButton.addEventListener('submit', saveBook);
 
 
 
