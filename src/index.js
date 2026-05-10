@@ -10,8 +10,17 @@ const bookCardContainer = document.querySelector(".book-card-container");
 
 function OpenAddBookDialog(){
     const dialog = document.querySelector(".new-book-dialog");
-    const bookTitleInput = document.querySelector(".input-title");
-    bookTitleInput.setCustomValidity("Please enter the title of your book!");
+    const bookTitleInput = document.querySelector("#input-title");
+    
+    bookTitleInput.addEventListener("input", (event) =>{
+        if(bookTitleInput.validity.valueMissing){
+            bookTitleInput.setCustomValidity("Please enter the title of your book!");
+            bookTitleInput.reportValidity();
+        }
+        else{
+            bookTitleInput.setCustomValidity("");
+        }
+    });
 
     dialog.showModal();
     bookTitleInput.focus();
