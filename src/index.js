@@ -16,6 +16,7 @@ function OpenAddBookDialog(){
         if(bookTitleInput.validity.valueMissing){
             bookTitleInput.setCustomValidity("Please enter the title of your book!");
             bookTitleInput.reportValidity();
+            console.log("title input invalid");
         }
         else{
             bookTitleInput.setCustomValidity("");
